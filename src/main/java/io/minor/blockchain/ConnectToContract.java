@@ -13,31 +13,16 @@ import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.gas.DefaultGasProvider;
 
-public class ConnectToContract {
+public class ConnectToContract extends SmartContract{
 
-	private final static String RINKEBY_KEY = "0727368c7ae05fdaa0557f129388102a52a5a8643409c16e7a745c91ac791e98";
-	private final static String GANACHE_KEY = "57d72b658e6a36a3409e52b1e4aebeae89680308ce8063edfa6ae320efe580bf";
-	private final static String MAIN_SMART_CONTRACT_ADDRESS = "0x1c0572bdbb656454a602d8fbd0cb9aa6893a3628";
+	private final static String MAIN_SMART_CONTRACT_ADDRESS = "0x851fbab03e3c32b71f53083289d54c13fc250f45";
 
-	private final static String PRIVATE_KEY = RINKEBY_KEY;
-	private final static BigInteger GAS_LIMIT = DefaultGasProvider.GAS_LIMIT;
-	public static final BigInteger GAS_PRICE = DefaultGasProvider.GAS_PRICE;
-
+	private final static String PRIVATE_KEY = GANACHE_KEY;
+	
 	public static void main(String[] args) {
-
-		System.out.println("Connecting to Ganache Ethereum ...");
-
-		//Web3j web3 = Web3j.build(new HttpService());
-		Web3j web3 = Web3j.build(new
-		HttpService("https://rinkeby.infura.io/v3/35689e739123405ba066ed5674070d27"));
-
-		/*
-		 * TransactionManager tranactionManager= new RawTransactionManager( web3,
-		 * getCredentialsFromPrivateKey() );
-		 */
-
+		Web3j web3 = ConnectToBlockchain(GANACHE_URL);
+		
 		System.out.println("Successfuly connected to Ganache Ethereum");
-		System.out.println("------------------------------------------------------------");
 		System.out.println("------------------------------------------------------------");
 
 		try {
@@ -45,38 +30,22 @@ public class ConnectToContract {
 			System.out.println("Connecting to smart contract");
 
 			Main_Smart_Contract mainContract = Main_Smart_Contract.load(MAIN_SMART_CONTRACT_ADDRESS, web3,
-					getCredentialsFromPrivateKey(), GAS_PRICE, GAS_LIMIT);
+					getCredentialsFromPrivateKey(PRIVATE_KEY), GAS_PRICE, GAS_LIMIT);
 
-			// String deployedAddress = deployContract(web3,
-			// getCredentialsFromPrivateKey());
-
-			System.out.println("Contract loaded:" + mainContract.getContractAddress());
+			System.out.println("Root contract loaded:" + mainContract.getContractAddress());
 
 			TransactionReceipt result = mainContract.createSmartContract().send();
-			System.out.println("transaction result: " + result.toString());
+			System.out.println("Branch contract deployed: " + result.toString());
 
-			/*
-			 * System.out.println("Storing value"); TransactionReceipt storeValue =
-			 * mainContract.storeValue(new BigInteger("100")).send();
-			 * System.out.println("Value stored");
-			 */
+			System.out.println("------------------------------------------------------------");
 
+			 Type getCompanyContratAddress1 = mainContract.getCompanySmartContractAddress("0x699846e7b68f4C7d55dCFC242A6f4373251dc31b").send();
+			 System.out.println("Child contract's address allocated to the company is: " + getCompanyContratAddress1.getValue());
 			
-			 Type getCompanyContratAddress1 = mainContract.getCompanySmartContractAddress("0x00873E1000a089190Ed582f3B1643EAefB4af6d2").send();
-			 System.out.println("Finally: " + getCompanyContratAddress1.getValue());
-			
-
-		} catch (IOException ex) {
-			throw new RuntimeException("Error whilst sending json-rpc requests", ex);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private static Credentials getCredentialsFromPrivateKey() {
-		return Credentials.create(PRIVATE_KEY);
-
-	}
 }

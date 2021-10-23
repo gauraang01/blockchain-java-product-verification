@@ -13,19 +13,9 @@ import org.web3j.tx.RawTransactionManager;
 import org.web3j.tx.TransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
 
-public class DeployMainContract {
+public class DeployMainContract extends SmartContract{
 
-	private final static String PRIVATE_KEY = "57d72b658e6a36a3409e52b1e4aebeae89680308ce8063edfa6ae320efe580bf"; 
-	private final static BigInteger GAS_LIMIT = DefaultGasProvider.GAS_LIMIT;
-	public static final BigInteger GAS_PRICE = DefaultGasProvider.GAS_PRICE;
-	  
-	 
-	
-	
-	private static Credentials getCredentialsFromPrivateKey() {
-		  return Credentials.create(PRIVATE_KEY); 	
-	  }
-	  
+	protected static String PRIVATE_KEY = GANACHE_KEY;  
 
 	
 	public static void main(String[] args) {
@@ -35,11 +25,8 @@ public class DeployMainContract {
 	    
 	    try {
 	     
-	      String contract = Main_Smart_Contract.deploy(web3 ,getCredentialsFromPrivateKey() , GAS_PRICE, GAS_LIMIT).send().getContractAddress();
-	      
-	      
-	      System.out.println("Contract deployed:"+ contract);
-	      
+	      String contract = Main_Smart_Contract.deploy(web3 ,getCredentialsFromPrivateKey(PRIVATE_KEY) , GAS_PRICE, GAS_LIMIT).send().getContractAddress();
+	      System.out.println("Main Contract deployed at address: "+ contract);
 	
 	    } catch (IOException ex) {
 	      throw new RuntimeException("Error whilst sending json-rpc requests", ex);
