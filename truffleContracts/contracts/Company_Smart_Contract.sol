@@ -4,13 +4,13 @@ pragma solidity ^0.8.0;
 
 contract Company_Smart_Contract {
     
-    uint256[] public Products;
+    uint256[] Products;
     
-    mapping(uint256 => bool) public hashcodeToTrue;
+    mapping(uint256 => bool) hashcodeToTrue;
     
     address owner;
     
-    constructor(address _owner) public {
+    constructor(address _owner){
         owner = _owner;
     }
     

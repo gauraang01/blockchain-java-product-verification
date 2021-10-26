@@ -14,6 +14,8 @@ public class SmartContract {
 	protected final static String RINKEBY_URL ="https://rinkeby.infura.io/v3/35689e739123405ba066ed5674070d27";
 	protected final static String GANACHE_URL = "HTTP://127.0.0.1:8545";
 	
+	protected final static String BLOCKCHAIN_URL = RINKEBY_URL;
+	
 	protected static String MAIN_SMART_CONTRACT_ADDRESS = "";
 	
 	protected final static BigInteger GAS_LIMIT = DefaultGasProvider.GAS_LIMIT;

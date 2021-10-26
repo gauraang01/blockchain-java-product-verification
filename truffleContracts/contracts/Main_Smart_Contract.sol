@@ -5,15 +5,10 @@ pragma solidity ^0.8.0;
 import "./Company_Smart_Contract.sol";
 
 contract Main_Smart_Contract {
-    address[] public walletAddresses;
+    address[] walletAddresses;
 
-    mapping(address => address) public walletAddressToSmartContractAddress;
+    mapping(address => address) walletAddressToSmartContractAddress;
 
-    uint256 value;
-
-    function storeValue(uint256 _value) public {
-        value = _value;
-    }
 
     function createSmartContract() public {
         Company_Smart_Contract companyContract = new Company_Smart_Contract(
