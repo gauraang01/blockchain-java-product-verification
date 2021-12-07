@@ -1,0 +1,77 @@
+body {
+  background-color: bisque;
+  background-image: url(a.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right top;
+  background-attachment: fixed;
+  border-width: 5px;
+  position: relative;
+  text-align: center;
+  padding: 100px 50px;
+  text-decoration: solid;
+  color: black;
+  height: 5px;
+  font-size: 35px;
+  font-size-adjust: 0.5;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+  padding: 30px 50px;
+  text-decoration: solid;
+  color: rgb(5, 4, 4);
+  margin: 40px;
+
+  font-size: 60px;
+  font-size-adjust: 0.5;
+  padding: 20px;
+  text-shadow: 3px 3px rgba(63, 63, 155, 0.644);
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: larger;
+}
+
+p {
+  margin: 2px;
+  padding: 10px;
+  /* border: groove rgb(118, 169, 228); */
+  text-shadow: 2px 2px rgba(63, 63, 155, 0.644);
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: larger;
+}
+
+button {
+  background-color: rgb(212, 114, 87);
+  text-transform: uppercase;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  padding: 12px 15px;
+  border: black;
+  text-align: center;
+  text-decoration: solid;
+  display: inline-block;
+  font-size: 30px;
+  border-radius: 40px;
+  margin-top: 20px;
+  position: relative;
+}
+
+button:hover {
+  background-color: rgba(236, 203, 111, 0.849);
+  box-shadow: 2px rgb(123, 128, 84);
+  transform: translate(-10px);
+  box-shadow: 50px rgb(4, 29, 4);
+}
+
+input {
+  font-size: 25px;
+  color: black;
+  background-color: rgb(248, 248, 248);
+  margin: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+input:hover {
+  background-color: rgba(236, 203, 111, 0.849);
+}

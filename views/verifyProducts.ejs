@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portal</title>
+    <header> <h1> User Portal</h1></header>  
+</head>
+<body>
+    <script src="../scripts/html5-qrcode.min.js"></script>
+<style>
+  .result{
+    background-color: green;
+    color:#fff;
+    padding:15px;
+  }
+  .row{
+    display:flex;
+  }
+</style>
+
+
+    <div class="row">
+    <div class="col">
+        <div style="width:500px;" id="reader"></div>
+    </div>
+    <div class="col" style="padding:30px;">
+        <h4>SCAN RESULT</h4>
+        <div id="status">Result Here</div>
+    </div>
+    </div>
+
+    <form id="myForm" action="/verified" method="post">
+        <p>
+            <label for="walletKey">Enter Your Wallet Key</label>
+            <input id="walletKey" name="walletKey" placeholder="Crypto wallet key" type="text">
+        </p>  
+        <p>   
+            <label for="contractAddress">Enter company's smart contract address</label>
+            <input id="contractAddress" name="contractAddress" placeholder="company's smart contract address" type="text">
+    
+        </p>    
+        <p>   
+            <label for="result">Result appears here:</label>
+            <input id="result" name="result" type="text">
+        </p>     
+            <button type=submit>Verify</button>
+        </form>
+
+    <script type="text/javascript">
+        function onScanSuccess(qrCodeMessage) {
+            let message = "Veriying......."
+            document.getElementById('status').innerHTML = '<span class="status">'+message+'</span>';
+            document.getElementById('result').value = qrCodeMessage;
+
+        }
+
+        function onScanError(errorMessage) {
+        //handle scan error
+        }
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "reader", { fps: 10, qrbox: 250 });
+        html5QrcodeScanner.render(onScanSuccess, onScanError);
+    </script>
+
+</body>
+</html>
