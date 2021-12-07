@@ -29,6 +29,7 @@ public class ApiHandler {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	
 	public String deployChild(@RequestParam String USER_WALLET_KEY,@RequestParam String USER_WALLET_ADDRESS) {
+		System.out.println("===============================deployChild===============================");
 		System.out.println(USER_WALLET_KEY  + " " +USER_WALLET_ADDRESS);
 		MainContract.createChildContract(MAIN_CONTRACT_ADDRESS, USER_WALLET_KEY);
 		
@@ -37,14 +38,22 @@ public class ApiHandler {
 	
 	@GetMapping("/addProduct")
 	public String addProduct(@RequestParam String USER_WALLET_KEY,@RequestParam String USER_WALLET_ADDRESS, @RequestParam String CHILD_CONTRACT_ADDRESS, @RequestParam String p1) {
-		System.out.println("Hereeee");
-		List<BigInteger> list = Arrays.asList(new BigInteger(p1));
+		System.out.println("===============================addProduct===============================");
+		System.out.println("Data: " + p1);
+		System.out.println("Converting to  Hashcode......");
+		int hashedvalue=p1.hashCode();
+		System.out.println("Hashcode: "+hashedvalue);
+		List<BigInteger> list = Arrays.asList(new BigInteger(String.valueOf(hashedvalue)));
 		ChildContract.addProducts(CHILD_CONTRACT_ADDRESS, USER_WALLET_KEY, USER_WALLET_ADDRESS, list);
 		return "Products Added";
 	}
 	
 	@GetMapping("/verifyProduct")
-	public String verifyProduct(@RequestParam String USER_WALLET_KEY, @RequestParam String CHILD_CONTRACT_ADDRESS, @RequestParam String hashcode) {
-		return ChildContract.verifyProduct(CHILD_CONTRACT_ADDRESS, USER_WALLET_KEY, new BigInteger(hashcode));
+	public String verifyProduct(@RequestParam String USER_WALLET_KEY, @RequestParam String CHILD_CONTRACT_ADDRESS, @RequestParam String data) {
+		System.out.println("===============================verifyProduct===============================");		System.out.println("data" + data);
+		System.out.println("Converting to  Hashcode......");
+		int hashedvalue=data.hashCode();
+		System.out.println("Hashcode: "+hashedvalue);
+		return ChildContract.verifyProduct(CHILD_CONTRACT_ADDRESS, USER_WALLET_KEY, new BigInteger(String.valueOf(hashedvalue)));
 	}
 }
